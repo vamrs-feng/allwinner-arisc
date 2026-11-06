@@ -8,7 +8,7 @@
 #include "uart_i.h"
 #include <libfdt.h>
 
-volatile u32 uart_pin_not_used = 1;
+volatile u32 uart_pin_not_used = 0;
 volatile u32 uart_lock = 1;
 volatile static u32 uart_rate;
 
@@ -116,8 +116,8 @@ s32 uart_init(void)
 	uart_rate = UART_BAUDRATE;
 #ifndef CFG_FDT_INIT_ARISC_UART_USED
 	if (!uart_pin_not_used) {
-		pin_set_multi_sel(PIN_GRP_PL, 2, 2);
-		pin_set_multi_sel(PIN_GRP_PL, 3, 2);
+		pin_set_multi_sel(PIN_GRP_PL, 6, 3);
+		pin_set_multi_sel(PIN_GRP_PL, 7, 3);
 	}
 #else
 	if (uart_init_from_dts() < 0)
